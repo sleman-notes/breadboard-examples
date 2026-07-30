@@ -1,1 +1,7 @@
 .ipynb_checkpoints*
+
+# build files
+*.map
+*.o
+*.elf
+*.bin
