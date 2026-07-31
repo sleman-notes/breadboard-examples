@@ -7,6 +7,9 @@ FLOAT=-mfloat-abi=hard
 BUILD_DIR = Build
 ROOT_DIR = .
 
+PORT ?= /dev/ttyUSB0
+BAUD ?= 115200
+
 LINKER= -T $(ROOT_DIR)/linkers/STM32F411.ld
 MAP_FILE= -Wl,-Map=$(BUILD_DIR)/$(TARGET).map
 
@@ -69,5 +72,10 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJS) $(DRIVERS)
 load:
 	jlink flash.jlink
 
+monitor:
+	picocom -b $(BAUD) $(PORT)
+
 clean:
 	rm -rf $(BUILD_DIR)/*.map $(BUILD_DIR)/*.o
+
+.PHONY: all load monitor clean
